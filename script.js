@@ -1,10 +1,23 @@
 class Player {
     constructor(name) {
         this.name = name;
+        this.score = 0; 
+        this.hand = []; 
+    }
+
+    addHand(deck) {
+        for (let i = 0; i < deck.length; i++) {
+            this.hand.push(deck[i]); 
+        }
+    }
+
+
+    incrementScore() {
+        this.score += 1 ;
     }
 
     describe() {
-        console.log(`${this.name} is playing War!`); 
+        console.log(`${this.name} has ${this.hand.length} cards and their score is ${this.score}`); 
     }
 }
 
@@ -122,6 +135,7 @@ class Deck {
 
 }
 
+
 //create deck
 const mainDeck = new Deck(); 
 
@@ -140,14 +154,21 @@ console.log(mainDeck.deck);
 let player1Hand = mainDeck.deck.slice(0,26);
 let player2Hand = mainDeck.deck.slice(26); 
 
+player1.addHand(player1Hand); 
+
+player1.incrementScore(); 
+
+player1.describe(); 
+
 console.log(player1Hand);
-console.log(player2Hand); 
+console.log(player2Hand.length); 
 
 let x = player1Hand[0]; 
 let y = player2Hand[0]; 
 
-console.log(x); 
-console.log(y); 
+//player1.incrementscore
+// console.log(x); 
+// console.log(y); 
 
 // player1Hand.push(x); 
 // player1Hand.push(y); 
@@ -157,29 +178,27 @@ console.log(y);
 // console.log(player1Hand); 
 // console.log(player2Hand); 
 
-compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
+
+// compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
+// compareHand(player1Hand, player2Hand); 
 
 
-compareHand(player1Hand, player2Hand); 
+//playGame(player1Hand, player2Hand); 
 
 
-
-compareHand(player1Hand, player2Hand); 
-
-
-
-compareHand(player1Hand, player2Hand); 
-
-
-
-compareHand(player1Hand, player2Hand); 
-
-
-
-compareHand(player1Hand, player2Hand); 
-
-console.log(player1Hand); 
-console.log(player2Hand); 
+// console.log(player1Hand); 
+// console.log(player2Hand); 
 
 
 
@@ -187,29 +206,29 @@ console.log(player2Hand);
 
 /* Functions for War Game */
 
+function playGame(deckOne, deckTwo) {
+do {
+    compareHand(deckOne, deckTwo)
+} while (deckOne.length != 0 && deckTwo.length != 0)
+} 
+
 function compareHand(deck1, deck2) {
     let x = deck1[0]; 
-    let y = deck2[0]; 
+    let y = deck2[0];  
+    //empty score 
 
     if (x.value > y.value) {
-        console.log('Player 1 Wins'); 
-        //pushed card to back of player's hand
-        deck1.push(x); 
-        deck1.push(y); 
+        //pushed card to back of player's hand 
         //removes current card from the front of each deck
         deck1.shift(x)
         deck2.shift(y); 
     } else if (x.value < y.value) {
-        console.log('Player 2 Wins');
-        deck2.push(x); 
-        deck2.push(y); 
+        console.log('Player 2 Wins ');
         //removes
         deck1.shift(x); 
         deck2.shift(y); 
     } else {
         console.log('Tie'); 
-        deck1.push(x); 
-        deck2.push(y); 
         deck1.shift(x); 
         deck2.shift(y); 
     }
