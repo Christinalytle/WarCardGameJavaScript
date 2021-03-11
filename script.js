@@ -83,9 +83,8 @@ let player2 = new Player("Player 2");
 dealCards(player1, player2, mainDeck); 
 
 //Play game until all cards hav been played 
-//playGame(player1, player2); 
+playGame(player1, player2); 
 
-console.log(compareHand(player1, player2)); 
 
 
 // /* Functions for War Game */
