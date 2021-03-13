@@ -1,10 +1,11 @@
+//Player Class 
 class Player {
     constructor(name) {
         this.name = name;
         this.score = 0; 
         this.hand = []; 
     }
-
+    //add cards to each player's hand
     addHand(deck) {
         for (let i = 0; i < deck.length; i++) {
             this.hand.push(deck[i]); 
@@ -12,30 +13,20 @@ class Player {
         return this.hand; 
     }
 
-
+    //add one to each player's score 
     incrementScore() {
         this.score += 1 ;
         return this.score; 
     }
 }
 
-// class Card {
-//     constructor(value, name, suit) {
-//         this.value = value; 
-//         this.name= name; 
-//         this.suit = suit; 
-//     }
-
-//     describe() {
-//         return `${this.value}, ${this.name}, ${this.suit}`; 
-//     }
-// }
-
+//Deck class 
 class Deck {
     constructor() {
         this.deck = [];
     }
 
+    //create deck of 52 cards 
     createDeck() {
         let suits = ['Hearts', 'Spades', 'Clubs', 'Diamonds'];
         let rank = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace'];
@@ -51,7 +42,8 @@ class Deck {
         }
         return this.deck; 
     }
-
+    
+    //push a deck, randomized/shuffled, into a new shuffled deck. 
     shuffle() {
         let count = this.deck.length;
             while(count) {
@@ -65,6 +57,7 @@ class Deck {
 
 /* Game Play */
 
+    
 //create deck
 const mainDeck = new Deck(); 
 
@@ -73,6 +66,7 @@ mainDeck.createDeck();
 //shuffle deck
 mainDeck.shuffle(); 
 
+//check to see if all cards are in the deck
 console.log(mainDeck); 
 
 //create players 
@@ -89,6 +83,7 @@ playGame(player1, player2);
 
 // /* Functions for War Game */
 
+//deal cards to each player 
 function dealCards(p1, p2, deck) {
     let player1Hand = deck.deck.slice(0,26);
     let player2Hand = deck.deck.slice(26); 
@@ -97,7 +92,7 @@ function dealCards(p1, p2, deck) {
     return player1Hand; 
 }
 
-
+//play game (call compareHand until there are no more cards left)
 function playGame(p1, p2) {
     do {
         compareHand(p1, p2);
@@ -109,20 +104,25 @@ function compareHand(p1, p2) {
     let x = p1.hand[0]; 
     let y = p2.hand[0];  
 
+
     if (x.value > y.value) {
         //removes first card from deck 
         p1.hand.shift(x);
         p2.hand.shift(y); 
+        //add one to player1's score if they win
         p1.incrementScore(); 
         return p1.score; 
     } else if (x.value < y.value) {
         //removes first card from deck
         p1.hand.shift(x); 
         p2.hand.shift(y); 
+        //add one to player2's score if they win
         p2.incrementScore()
         return p2.score; 
     } else {
         p1.hand.shift(x); 
         p2.hand.shift(y); 
+        //do not add a point to scores
+        return 0; 
     }
 }
